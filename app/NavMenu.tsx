@@ -1,3 +1,4 @@
+import { SignInButton } from "@/components/buttons"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -67,7 +68,7 @@ export default function NavMenu() {
             <Link href={"/users"}>Users</Link>
           </li>
         </ul>
-        <a className="btn">Button</a>
+        <SignInButton />
       </div>
     </nav>
   )

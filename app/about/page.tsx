@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "About Us",
-  description: "About NEXTsocial"
+  title: "About NEXTsocial",
+  description: "Simple social media web app, made using Next.JS, Tailwind CSS and Prisma."
 }
 
 export default async function About() {
