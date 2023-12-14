@@ -10,18 +10,21 @@ interface Props {
 
 export default function UserCard({ id, name, age, image }: Props) {
   return (
-    <div>
-      <Image
-        src={image ?? "/mememan.webp"}
-        alt={`${name}'s profile`}
-      />
-
-      <div>
-        <h3>
-          <Link href={`/users/${id}`}>{name}</Link>
-        </h3>
+    <Link
+      href={`/users/${id}`}
+      className="transition ease-in-out delay-50 card w-96 bg-neutral shadow-xl hover:scale-110"
+    >
+      <div className="card-body">
+        <Image
+          src={image ?? "/user.png"}
+          alt={`${name}'s profile`}
+          width="64"
+          height="64"
+          className="rounded-full"
+        />
+        <h2 className="card-title">{name}</h2>
         <p>Age: {age}</p>
       </div>
-    </div>
+    </Link>
   )
 }

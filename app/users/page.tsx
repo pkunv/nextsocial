@@ -5,7 +5,7 @@ export default async function Users() {
   const users = await prisma.user.findMany()
 
   return (
-    <div>
+    <div className="grid gap-4 grid-cols-3 grid-rows-3">
       {users.map((user) => {
         return (
           <UserCard
