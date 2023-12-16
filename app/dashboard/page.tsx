@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma"
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"
 import { authOptions } from "../api/auth/[...nextauth]/route"
+import { ProfileForm } from "./ProfileForm"
 
 export default async function Dashboard() {
   const session = await getServerSession(authOptions)
@@ -14,9 +15,10 @@ export default async function Dashboard() {
   const user = await prisma.user.findUnique({ where: { email: currentUserEmail } })
 
   return (
-    <>
+    <div className="prose">
       <h1>Dashboard</h1>
       <p>Welcome {user?.name}</p>
-    </>
+      <ProfileForm user={user} />
+    </div>
   )
 }

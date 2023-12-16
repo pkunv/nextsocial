@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma"
-import { User, getServerSession } from "next-auth"
+import { getServerSession } from "next-auth"
 import { NextRequest, NextResponse } from "next/server"
 
 export async function POST(req: Request) {
@@ -9,7 +9,7 @@ export async function POST(req: Request) {
 
   const currentUserId = await prisma.user
     .findUnique({ where: { email: currentUserEmail } })
-    .then((user: User) => user?.id!)
+    .then((user) => user?.id!)
 
   const record = await prisma.follows.create({
     data: {
@@ -28,7 +28,7 @@ export async function DELETE(req: NextRequest) {
 
   const currentUserId = await prisma.user
     .findUnique({ where: { email: currentUserEmail } })
-    .then((user: User) => user?.id!)
+    .then((user) => user?.id!)
 
   const record = await prisma.follows.delete({
     where: {
