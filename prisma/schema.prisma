@@ -42,7 +42,7 @@ model User {
   id            String    @id @default(cuid())
   name          String?
   bio           String?   @db.Text
-  age           Int?
+  birthDate     DateTime? @db.Date
   email         String?   @unique
   emailVerified DateTime?
   image         String?
@@ -50,6 +50,16 @@ model User {
   sessions      Session[]
   followedBy    Follows[] @relation("following")
   following     Follows[] @relation("follower")
+  posts         Post[]    @relation("userId")
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  content   String
+  published Boolean
+  createdAt DateTime @default(now())
+  user      User     @relation("userId", fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
 }
 
 model Follows {

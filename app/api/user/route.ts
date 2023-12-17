@@ -8,7 +8,8 @@ export async function PUT(req: Request) {
   const currentUserEmail = session?.user?.email!
 
   const data = await req.json()
-  data.age = Number(data.age)
+  // Convert the date string to a Date object, prisma requires this
+  data.birthDate = new Date(data.birthDate).toISOString()
 
   const user = await prisma.user.update({
     where: { email: currentUserEmail },

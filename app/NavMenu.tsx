@@ -40,6 +40,9 @@ export default function NavMenu() {
             <li>
               <Link href={"/users"}>Users</Link>
             </li>
+            <li>
+              <SignInButton />
+            </li>
           </ul>
         </div>
         <Link

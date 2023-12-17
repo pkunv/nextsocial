@@ -1,3 +1,4 @@
+import ToastContainerWrapper from "@/components/ToastContainerWrapper"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import AuthProvider from "./AuthProvider"
@@ -17,6 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <html lang="en">
         <body className={inter.className + " bg-base-100 grid place-items-center "}>
           <div className="w-5/6">
+            <ToastContainerWrapper />
             <NavMenu />
             <div className="p-6">{children}</div>
           </div>

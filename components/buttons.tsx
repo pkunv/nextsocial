@@ -44,7 +44,7 @@ export function SignInButton() {
 
   return (
     <button
-      className="btn btn-ghost mx-2"
+      className="btn btn-ghost mx-2 "
       onClick={() => signIn()}
     >
       Sign in

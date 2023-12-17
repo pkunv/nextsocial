@@ -16,7 +16,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function UserProfile({ params }: Props) {
   const user = await prisma.user.findUnique({ where: { id: params.id } })
   if (!user) throw new Error("This user does not exist!")
-  const { name, bio, image, age, id } = user ?? {}
+  const { name, bio, image, birthDate, id } = user ?? {}
+  const age = birthDate ? new Date().getFullYear() - new Date(birthDate!).getFullYear() : "n/a"
 
   return (
     <div className="prose">
@@ -34,3 +35,4 @@ export default async function UserProfile({ params }: Props) {
     </div>
   )
 }
+//<FollowButton targetUserId={id} />

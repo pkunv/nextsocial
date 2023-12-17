@@ -1,15 +1,23 @@
 "use client"
 
+import { useState, useTransition } from "react"
+import { toast } from "react-toastify"
+
 export function ProfileForm({ user }: any) {
+  const [isPending, startTransition] = useTransition()
+  const [isFetching, setIsFetching] = useState(false)
+  const isMutating = isFetching || isPending
+
   const updateUser = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setIsFetching(true)
 
     const formData = new FormData(e.currentTarget)
 
     const body = {
       name: formData.get("name"),
       bio: formData.get("bio"),
-      age: formData.get("age"),
+      birthDate: formData.get("birthDate"),
       image: formData.get("image")
     }
 
@@ -21,7 +29,15 @@ export function ProfileForm({ user }: any) {
       }
     })
 
-    await res.json()
+    if (res.ok)
+      toast.success("You updated your profile succesfully!", {
+        autoClose: 1500
+      })
+    else
+      toast.error(`There is a problem with your request: ${res.statusText}`, {
+        autoClose: 3500
+      })
+    setIsFetching(false)
   }
 
   return (
@@ -52,13 +68,14 @@ export function ProfileForm({ user }: any) {
                 htmlFor="age"
                 className="label"
               >
-                Age
+                Birth date
               </label>
               <input
-                type="text"
-                name="age"
-                defaultValue={user?.age ?? 0}
+                type="date"
+                name="birthDate"
+                defaultValue={new Date(user?.birthDate).toISOString().split("T")[0] ?? ""}
                 className="input input-bordered w-full max-w-xs"
+                required
               />
             </div>
           </div>
@@ -97,7 +114,7 @@ export function ProfileForm({ user }: any) {
           type="submit"
           className="btn btn-primary mt-4 w-full"
         >
-          Save
+          Save {isMutating && <span className="loading loading-spinner-small"></span>}
         </button>
       </form>
     </div>
