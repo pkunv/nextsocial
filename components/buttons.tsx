@@ -13,7 +13,10 @@ export function SignInButton() {
   }
   if (status === "authenticated") {
     return (
-      <div className="dropdown">
+      <div
+        id="dashboard-dropdown"
+        className="dropdown"
+      >
         <div
           tabIndex={0}
           role="button"
@@ -45,6 +48,7 @@ export function SignInButton() {
   return (
     <button
       className="btn btn-ghost mx-2 "
+      id="sign-in"
       onClick={() => signIn()}
     >
       Sign in

@@ -35,10 +35,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# prisma migrations
+/prisma/migrations/
+
+# playwright
+
 /test-results/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
-
-# prisma migrations
-/prisma/migrations/

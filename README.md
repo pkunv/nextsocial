@@ -19,16 +19,16 @@ DATABASE_URL=postgresql://USER:PASSWORD@HOST:PORT/DATABASE
 SHADOW_DATABASE_URL=postgresql://USER:PASSWORD@HOST:PORT/DATABASESHADOW
 ```
 
-Then, install dependencies and migrate schema to your database
+Then, install dependencies and migrate schema to your database with seed data:
 
 ```bash
 npm i
-npx prisma migrate dev
+npm run init-db
 ```
 
 To run the web app use
 
-```
+```bash
 npm run dev
 ```
 
