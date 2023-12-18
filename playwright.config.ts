@@ -29,9 +29,29 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry"
   },
-
   /* Configure projects for major browsers */
   projects: [
+    { name: "setup", testMatch: /.*\.setup\.ts/ },
+    {
+      name: "chromium",
+      use: {
+        ...devices["Desktop Chrome"],
+        // Use prepared auth state.
+        storageState: "tests-setup/storageState.json"
+      },
+      dependencies: ["setup"]
+    },
+
+    {
+      name: "firefox",
+      use: {
+        ...devices["Desktop Firefox"],
+        // Use prepared auth state.
+        storageState: "tests-setup/storageState.json"
+      },
+      dependencies: ["setup"]
+    }
+    /*
     {
       name: "chromium",
       use: { ...devices["Desktop Chrome"] }
@@ -46,6 +66,7 @@ export default defineConfig({
       name: "webkit",
       use: { ...devices["Desktop Safari"] }
     }
+    */
 
     /* Test against mobile viewports. */
     // {
