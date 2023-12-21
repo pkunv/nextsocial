@@ -1,8 +1,18 @@
 import { PrismaClient } from "@prisma/client"
 const prisma = new PrismaClient()
 async function main() {
-  //await prisma.post.deleteMany({ where: { user: { email: { contains: "example.com" } } } })
-  //await prisma.user.deleteMany({ where: { email: { contains: "example.com" } } })
+  await prisma.post.deleteMany({ where: { user: { email: { contains: "example.com" } } } })
+  await prisma.user.deleteMany({ where: { email: { contains: "example.com" } } })
+  const e2e = await prisma.user.upsert({
+    where: { email: "e2e@e2e.com" },
+    update: {},
+    create: {
+      email: "e2e@e2e.com",
+      name: "E2e User",
+      bio: "E2e",
+      birthDate: new Date("1998-01-01")
+    }
+  })
   const alice = await prisma.user.upsert({
     where: { email: "alice@example.com" },
     update: {},
