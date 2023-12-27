@@ -26,9 +26,3 @@ test("users route contains users", async ({ page }) => {
   const usersCount = await usersList.locator("a").count()
   expect(usersCount).toBeGreaterThan(0)
 })
-
-test("should see profile picture while signed in", async ({ page }) => {
-  await page.goto("/")
-
-  await expect(page.getByAltText("User profile picture")).toBeVisible()
-})

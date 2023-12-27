@@ -5,7 +5,7 @@ interface Props {
   content: string | null
   createdAt: Date
   id: number
-  slug: String
+  slug: String | null
   title: String
   user: User
 }

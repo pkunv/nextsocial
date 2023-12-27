@@ -73,7 +73,9 @@ export function ProfileForm({ user }: any) {
               <input
                 type="date"
                 name="birthDate"
-                defaultValue={new Date(user?.birthDate).toISOString().split("T")[0] ?? ""}
+                defaultValue={
+                  user?.birthDate ? new Date(user?.birthDate).toISOString().split("T")[0] : ""
+                }
                 className="input input-bordered w-full max-w-xs"
                 required
               />
