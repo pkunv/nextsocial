@@ -26,7 +26,7 @@ export async function POST(req: Request) {
 }
 
 export async function DELETE(req: NextRequest) {
-  const session = await getServerSession()
+  const session = await getServerSession(authOptions)
   const currentUserEmail = session?.user?.email!
   const targetUserId = req.nextUrl.searchParams.get("targetUserId")
   const currentUserId = await prisma.user

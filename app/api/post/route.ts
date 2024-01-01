@@ -1,7 +1,15 @@
 import { prisma } from "@/lib/prisma"
+import { Prisma } from "@prisma/client"
 import { getServerSession } from "next-auth"
 import { NextResponse } from "next/server"
 import { authOptions } from "../auth/[...nextauth]/route"
+
+const validateTitle = (title: string) => title.length < 3 || title.length > 50
+
+const validateContent = (content: string) => content.length < 3 || content.length > 10000
+
+const validatePost = (post: Prisma.PostCreateInput) =>
+  validateTitle(post.title) && validateContent(post.content)
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions)
@@ -12,7 +20,12 @@ export async function POST(req: Request) {
     .then((user) => user?.id!)
 
   const data = await req.json()
+
+  if (!validatePost(data))
+    return NextResponse.json({ error: "Post validation error." }, { status: 400 })
+
   data.userId = currentUserId
+  data.published = true
 
   let post = await prisma.post.create({
     data
@@ -37,6 +50,9 @@ export async function PUT(req: Request) {
     .then((user) => user?.id!)
 
   const data = await req.json()
+
+  if (!validatePost(data))
+    return NextResponse.json({ error: "Post validation error." }, { status: 400 })
 
   data.slug = `${data.id}-${data.title.replace(/\s/g, "-")}`
 

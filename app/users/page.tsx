@@ -1,8 +1,20 @@
+import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 import UserCard from "@/components/UserCard"
 import { prisma } from "@/lib/prisma"
+import { getServerSession } from "next-auth"
 
 export default async function Users() {
-  const users = await prisma.user.findMany()
+  const session = await getServerSession(authOptions)
+  const currentUserEmail = session?.user?.email!
+
+  const currentUserId = await prisma.user
+    .findUnique({ where: { email: currentUserEmail } })
+    .then((user) => user?.id!)
+  const following = await prisma.follows.findMany({
+    where: { followerId: currentUserId }
+  })
+
+  const users = await prisma.user.findMany({ include: { followedBy: true } })
 
   return (
     <div
@@ -14,6 +26,7 @@ export default async function Users() {
           <UserCard
             key={user.id}
             {...user}
+            userId={currentUserId}
           />
         )
       })}

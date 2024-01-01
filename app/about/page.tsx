@@ -7,9 +7,11 @@ export const metadata: Metadata = {
 
 export default async function About() {
   return (
-    <main className="prose lg:prose-xl">
-      <h1>About</h1>
+    <>
+      <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl lg:text-6xl">
+        About
+      </h1>
       <p>Simple social media web app, made using Next.JS, Tailwind CSS and Prisma.</p>
-    </main>
+    </>
   )
 }

@@ -1,26 +1,24 @@
-export const revalidate = 420 // isr
-
-interface Post {
-  title: string
-  content: string
-  slug: string
-}
+import { prisma } from "@/lib/prisma"
+import { notFound } from "next/navigation"
 
 interface Props {
   params: { slug: string }
 }
 
 export async function generateStaticParams() {
-  const posts: Post[] = await fetch("http://localhost:3000/api/content").then((res) => res.json())
+  const posts = await prisma.post.findMany({
+    select: { slug: true, id: true, title: true },
+    where: { published: true }
+  })
 
   return posts.map((post) => ({
-    slug: post.slug
+    slug: post.slug ?? post.id + `-` + post.title.toLowerCase().replace(/ /g, "-")
   }))
 }
 
 export default async function BlogPostPage({ params }: Props) {
-  const posts: Post[] = await fetch("http://localhost:3000/api/content").then((res) => res.json())
-  const post = posts.find((post) => post.slug === params.slug)!
+  const post = (await prisma.post.findUnique({ where: { slug: params.slug } })) ?? undefined
+  if (!post) notFound()
 
   return (
     <div className="prose lg:prose-xl">

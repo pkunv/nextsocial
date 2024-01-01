@@ -26,12 +26,6 @@ export default function FollowClient({ targetUserId, isFollowing }: Props) {
     setIsFetching(false)
 
     startTransition(() => {
-      // Refresh the current route:
-      // - Makes a new request to the server for the route
-      // - Re-fetches data requests and re-renders Server Components
-      // - Sends the updated React Server Component payload to the client
-      // - The client merges the payload without losing unaffected
-      //   client-side React state or browser state
       router.refresh()
     })
   }

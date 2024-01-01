@@ -1,6 +1,8 @@
+import FollowButton from "@/components/FollowButton/FollowButton"
 import { prisma } from "@/lib/prisma"
 import { Metadata } from "next"
 import Image from "next/image"
+import { notFound } from "next/navigation"
 
 interface Props {
   params: {
@@ -15,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function UserProfile({ params }: Props) {
   const user = await prisma.user.findUnique({ where: { id: params.id } })
-  if (!user) throw new Error("This user does not exist!")
+  if (!user) notFound()
   const { name, bio, image, birthDate, id } = user ?? {}
   const age = birthDate ? new Date().getFullYear() - new Date(birthDate!).getFullYear() : "n/a"
 
@@ -32,7 +34,7 @@ export default async function UserProfile({ params }: Props) {
       <p>Age: {age}</p>
       <h3>Bio</h3>
       <p>{bio}</p>
+      <FollowButton targetUserId={id} />
     </div>
   )
 }
-//<FollowButton targetUserId={id} />

@@ -42,7 +42,7 @@ export function ProfileForm({ user }: any) {
 
   return (
     <div>
-      <h2>Edit Your Profile</h2>
+      <h2 className="text-4xl font-extrabold">Edit your profile</h2>
       <form
         onSubmit={updateUser}
         className="form-control"

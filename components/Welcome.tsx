@@ -1,8 +1,10 @@
 export default function Welcome() {
   return (
-    <main className="prose lg:prose-xl">
-      <h1>Welcome to NEXTsocial!</h1>
+    <>
+      <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl lg:text-6xl">
+        Welcome to NEXTsocial!
+      </h1>
       <p>Please log in to access features such as friends and posts.</p>
-    </main>
+    </>
   )
 }
