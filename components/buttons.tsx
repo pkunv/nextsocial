@@ -6,42 +6,26 @@ import Link from "next/link"
 
 export function SignInButton() {
   const { data: session, status } = useSession()
-  console.log(session, status)
 
   if (status === "loading") {
     return <span className="loading loading-spinner loading-md"></span>
   }
   if (status === "authenticated") {
     return (
-      <div
-        id="dashboard-dropdown"
-        className="dropdown"
+      <Link
+        href={"/dashboard"}
+        tabIndex={0}
+        role="button"
+        className="btn btn-ghost m-1"
       >
-        <div
-          tabIndex={0}
-          role="button"
-          className="btn btn-ghost m-1"
-        >
-          <Image
-            src={session.user?.image ?? `/user.png`}
-            width={32}
-            height={32}
-            alt="User profile picture"
-            className="rounded-full"
-          />
-        </div>
-        <ul
-          tabIndex={0}
-          className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
-        >
-          <li>
-            <Link href={"/dashboard"}>Dashboard</Link>
-          </li>
-          <li>
-            <SignOutButton />
-          </li>
-        </ul>
-      </div>
+        <Image
+          src={session.user?.image ?? `/user.png`}
+          width={32}
+          height={32}
+          alt="User profile picture"
+          className="rounded-full"
+        />
+      </Link>
     )
   }
 
@@ -59,6 +43,7 @@ export function SignInButton() {
 export function SignOutButton() {
   return (
     <button
+      className="btn btn-warning w-full"
       onClick={() => {
         signOut()
       }}

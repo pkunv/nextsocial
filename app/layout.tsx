@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="w-5/6">
             <ToastContainerWrapper />
             <NavMenu />
-            <main className="p-6">{children}</main>
+            {children}
           </div>
         </body>
       </html>

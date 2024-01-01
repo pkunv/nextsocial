@@ -1,3 +1,4 @@
+import { SignOutButton } from "@/components/buttons"
 import { prisma } from "@/lib/prisma"
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"
@@ -20,6 +21,10 @@ export default async function Dashboard() {
         Dashboard
       </h1>
       <ProfileForm user={user} />
+      <div className="divider"></div>
+      <section>
+        <SignOutButton />
+      </section>
     </div>
   )
 }
