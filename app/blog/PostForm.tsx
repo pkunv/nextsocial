@@ -37,7 +37,7 @@ export function PostForm() {
       startTransition(() => {
         router.refresh()
       })
-      // reset the form after successfull submission
+      // reset the form after successful submission
       formElement.reset()
     } else
       toast.error(`There is a problem with your request: ${res.statusText}`, {
@@ -47,7 +47,7 @@ export function PostForm() {
   }
 
   return (
-    <section>
+    <section className="my-2 w-1/2">
       <h2 className="text-4xl font-extrabold">Add a new post</h2>
       <form
         onSubmit={submitForm}
