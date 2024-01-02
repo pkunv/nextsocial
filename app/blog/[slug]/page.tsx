@@ -17,13 +17,18 @@ export async function generateStaticParams() {
 }
 
 export default async function BlogPostPage({ params }: Props) {
-  const post = (await prisma.post.findUnique({ where: { slug: params.slug } })) ?? undefined
+  const post =
+    (await prisma.post.findUnique({ where: { slug: params.slug }, include: { user: true } })) ??
+    undefined
   if (!post) notFound()
 
   return (
-    <div className="prose lg:prose-xl">
-      <h1>{post.title}</h1>
-      <p>{post.content}</p>
-    </div>
+    <article className="card bg-neutral shadow-xl p-8 w-full">
+      <h3 className="card-title text-3xl font-bold">{post.title}</h3>
+      <span className="text-sm bg-neutral m-2">
+        {post.user.name} | {post.createdAt.toLocaleDateString()}
+      </span>
+      <p>{post.content.substring(0, 32)}</p>
+    </article>
   )
 }

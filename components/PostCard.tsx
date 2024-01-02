@@ -8,7 +8,7 @@ interface Props {
   slug: String | null
   title: String
   user: User
-  currentUserId: String | null
+  currentUserId: String | null | undefined
 }
 
 export default function PostCard({

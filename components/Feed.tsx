@@ -1,4 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { getCurrentUserId } from "@/lib/getCurrentUserId"
 import { prisma } from "@/lib/prisma"
 import { getServerSession } from "next-auth"
 import PostCard from "./PostCard"
@@ -7,9 +8,7 @@ export default async function Feed() {
   const session = await getServerSession(authOptions)
   const currentUserEmail = session?.user?.email!
 
-  const currentUserId = await prisma.user
-    .findUnique({ where: { email: currentUserEmail } })
-    .then((user) => user?.id!)
+  const currentUserId = (await getCurrentUserId()) ?? undefined
   const following = await prisma.follows.findMany({
     where: { followerId: currentUserId }
   })
@@ -25,7 +24,7 @@ export default async function Feed() {
   })
 
   return (
-    <>
+    <section className="w-1/2">
       <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl lg:text-6xl">
         Your feed
       </h1>
@@ -33,8 +32,9 @@ export default async function Feed() {
         <PostCard
           key={post.id}
           {...post}
+          currentUserId={currentUserId}
         />
       )) ?? "No posts to show! Follow some users to see their posts here."}
-    </>
+    </section>
   )
 }

@@ -1,10 +1,8 @@
 import PostCard from "@/components/PostCard"
+import Search from "@/components/Search"
 import { getCurrentUserId } from "@/lib/getCurrentUserId"
 import { prisma } from "@/lib/prisma"
-import { getServerSession } from "next-auth"
-import { authOptions } from "../api/auth/[...nextauth]/route"
 import { PostForm } from "./PostForm"
-import Search from "./Search"
 
 export default async function Blog({
   searchParams: { q, searchBy }
@@ -24,8 +22,6 @@ export default async function Blog({
       }
     })
   }
-
-  const session = await getServerSession(authOptions)
   const currentUserId = await getCurrentUserId()
 
   return (
@@ -33,9 +29,9 @@ export default async function Blog({
       <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl lg:text-6xl">
         Blog
       </h1>
-      {session ? <PostForm /> : null}
+      {currentUserId ? <PostForm /> : null}
       <div className="divider"></div>
-      <section className="my-2">
+      <section className="my-2 w-1/2">
         <h2 className="text-4xl font-extrabold">Posts list</h2>
         <Search />
         <div

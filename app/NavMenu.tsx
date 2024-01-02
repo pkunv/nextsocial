@@ -4,7 +4,7 @@ import Link from "next/link"
 
 export default function NavMenu() {
   return (
-    <nav className="navbar bg-base-100 mb-2">
+    <nav className="navbar bg-base-100 mb-2 sticky top-0">
       {/* mobile nav menu */}
       <div className="navbar-start">
         <div className="dropdown">
@@ -60,7 +60,7 @@ export default function NavMenu() {
         </Link>
       </div>
       {/* desktop nav menu */}
-      <div className="navbar-end hidden lg:flex">
+      <div className="navbar-end hidden lg:flex ">
         <ul className="menu menu-horizontal px-1 space-x-2">
           <li>
             <Link href={"/about"}>About</Link>
