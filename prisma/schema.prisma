@@ -50,7 +50,8 @@ model User {
   sessions      Session[]
   followedBy    Follows[] @relation("following")
   following     Follows[] @relation("follower")
-  posts         Post[]    @relation("userId")
+  posts         Post[]    @relation("user")
+  likes         Likes[]   @relation("user")
 }
 
 model Post {
@@ -60,8 +61,18 @@ model Post {
   content   String
   published Boolean
   createdAt DateTime @default(now())
-  user      User     @relation("userId", fields: [userId], references: [id], onDelete: Cascade)
+  user      User     @relation("user", fields: [userId], references: [id], onDelete: Cascade)
   userId    String
+  likes     Likes[]  @relation("post")
+}
+
+model Likes {
+  user   User   @relation("user", fields: [userId], references: [id])
+  userId String
+  post   Post   @relation("post", fields: [postId], references: [id])
+  postId Int
+
+  @@id([userId, postId])
 }
 
 model Follows {
