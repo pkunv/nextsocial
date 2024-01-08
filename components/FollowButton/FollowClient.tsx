@@ -1,7 +1,7 @@
 "use client"
+import Progress from "@/components/Progress"
 import { useRouter } from "next/navigation"
 import { useState, useTransition } from "react"
-
 interface Props {
   targetUserId: string
   isFollowing: boolean
@@ -47,7 +47,7 @@ export default function FollowClient({ targetUserId, isFollowing }: Props) {
         className="btn"
         onClick={unfollow}
       >
-        {!isMutating ? "Unfollow" : "..."}
+        {!isMutating ? "Unfollow" : <Progress />}
       </button>
     )
   } else {
@@ -56,7 +56,7 @@ export default function FollowClient({ targetUserId, isFollowing }: Props) {
         className="btn"
         onClick={follow}
       >
-        {!isMutating ? "Follow" : "..."}
+        {!isMutating ? "Follow" : <Progress />}
       </button>
     )
   }

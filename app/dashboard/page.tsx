@@ -16,7 +16,7 @@ export default async function Dashboard() {
   const user = await prisma.user.findUnique({ where: { email: currentUserEmail } })
 
   return (
-    <div className="w-1/2">
+    <>
       <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl lg:text-6xl">
         Dashboard
       </h1>
@@ -25,6 +25,6 @@ export default async function Dashboard() {
       <section>
         <SignOutButton />
       </section>
-    </div>
+    </>
   )
 }

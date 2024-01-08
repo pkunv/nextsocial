@@ -23,7 +23,7 @@ export default async function Users({
       <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl lg:text-6xl">
         Users
       </h1>
-      <section>
+      <section className="my-2 w-1/2">
         <h2 className="text-4xl font-extrabold">Users list</h2>
         <Search
           search={true}

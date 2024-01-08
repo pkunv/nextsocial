@@ -41,7 +41,7 @@ export function ProfileForm({ user }: any) {
   }
 
   return (
-    <div>
+    <section className="my-2 w-1/2">
       <h2 className="text-4xl font-extrabold">Edit your profile</h2>
       <form
         onSubmit={updateUser}
@@ -119,6 +119,6 @@ export function ProfileForm({ user }: any) {
           Save {isMutating && <span className="loading loading-spinner-small"></span>}
         </button>
       </form>
-    </div>
+    </section>
   )
 }

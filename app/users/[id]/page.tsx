@@ -22,7 +22,7 @@ export default async function UserProfile({ params }: Props) {
   const age = birthDate ? new Date().getFullYear() - new Date(birthDate!).getFullYear() : "n/a"
 
   return (
-    <div className="prose">
+    <div className="prose w-1/2 card card-body">
       <h1>{name}</h1>
 
       <Image

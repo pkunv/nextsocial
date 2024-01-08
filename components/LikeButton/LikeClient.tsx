@@ -1,4 +1,5 @@
 "use client"
+import Progress from "@/components/Progress"
 import { useRouter } from "next/navigation"
 import { useState, useTransition } from "react"
 
@@ -47,7 +48,7 @@ export default function LikeClient({ targetPostId, isLiking }: Props) {
         className="btn"
         onClick={unlike}
       >
-        {!isMutating ? "Unfollow" : "..."}
+        {!isMutating ? "Unlike" : <Progress />}
       </button>
     )
   } else {
@@ -56,7 +57,7 @@ export default function LikeClient({ targetPostId, isLiking }: Props) {
         className="btn"
         onClick={like}
       >
-        {!isMutating ? "Follow" : "..."}
+        {!isMutating ? "Like" : <Progress />}
       </button>
     )
   }
