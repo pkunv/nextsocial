@@ -24,17 +24,19 @@ export default async function Feed() {
   })
 
   return (
-    <section className="w-1/2">
+    <>
       <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl lg:text-6xl">
         Your feed
       </h1>
-      {posts.map((post) => (
-        <PostCard
-          key={post.id}
-          {...post}
-          currentUserId={currentUserId}
-        />
-      )) ?? "No posts to show! Follow some users to see their posts here."}
-    </section>
+      <section className="w-1/2">
+        {posts.map((post) => (
+          <PostCard
+            key={post.id}
+            {...post}
+            currentUserId={currentUserId}
+          />
+        )) ?? "No posts to show! Follow some users to see their posts here."}
+      </section>
+    </>
   )
 }

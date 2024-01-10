@@ -33,13 +33,13 @@ export default function NavMenu() {
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <Link href={"/about"}>About</Link>
-            </li>
-            <li>
               <Link href={"/blog"}>Blog</Link>
             </li>
             <li>
               <Link href={"/users"}>Users</Link>
+            </li>
+            <li>
+              <Link href={"/about"}>About</Link>
             </li>
             <li>
               <SignInButton />
@@ -63,13 +63,13 @@ export default function NavMenu() {
       <div className="navbar-end hidden lg:flex ">
         <ul className="menu menu-horizontal px-1 space-x-2">
           <li>
-            <Link href={"/about"}>About</Link>
-          </li>
-          <li>
             <Link href={"/blog"}>Blog</Link>
           </li>
           <li>
             <Link href={"/users"}>Users</Link>
+          </li>
+          <li>
+            <Link href={"/about"}>About</Link>
           </li>
         </ul>
         <SignInButton />
